@@ -55,6 +55,18 @@ port = 9999
 
 class ClientThread(threading.Thread):
     def __init__(self, ip, port, socket):
+        """Initializes a new instance of the class with the given IP, port, and socket.
+        Parameters:
+            - ip (str): The IP address of the instance.
+            - port (int): The port number of the instance.
+            - socket (socket): The socket object used for communication.
+        Returns:
+            - None: This function does not return anything.
+        Processing Logic:
+            - Sets the IP, port, and socket attributes.
+            - Creates a new Pages object for the instance.
+            - Runs on a separate thread."""
+        
         threading.Thread.__init__(self)
         self.ip = ip
         self.port = port
@@ -62,6 +74,20 @@ class ClientThread(threading.Thread):
         self.pages = Pages()
 
     def run(self):
+        """Sends an HTTP response to the client.
+        Parameters:
+            - self (type): The current instance of the class.
+        Returns:
+            - None: No return value.
+        Processing Logic:
+            - Receive request from client.
+            - Check if request is valid.
+            - Close socket if request is invalid.
+            - Create HTTP response with code, content type, and HTML.
+            - Send response to client.
+            - Close socket.
+            - If specified, run subprocess."""
+        
         req = self.socket.recv(2048)
         res = self.pages.get(req)
         if res is None:
@@ -80,12 +106,44 @@ class ClientThread(threading.Thread):
 
 class Pages():
     def file_len(self, fn):
+        """"Returns the number of lines in a given file."
+        Parameters:
+            - fn (str): The name of the file to be processed.
+        Returns:
+            - int: The number of lines in the given file.
+        Processing Logic:
+            - Open the file using the given name.
+            - Iterate through each line in the file.
+            - Increment the counter for each line.
+            - Return the final count of lines in the file."""
+        
         with open(fn) as f:
             for i, l in enumerate(f):
                 pass
         return i + 1
 
     def html_army_map(self,target=None):
+        """
+        <link rel="stylesheet" href="/js/style.css" />
+        <link rel="stylesheet" href="/js/ajaxmap.css" />
+        <link rel="stylesheet" href="/js/leaflet/leaflet.css" />
+        <link rel="stylesheet" href="/js/cluster/MarkerCluster.Default.css"/>
+        <link rel="stylesheet" href="/js/cluster/MarkerCluster.css"/>
+        <script src="/js/leaflet/leaflet.js"></script>
+        <script src="/js/cluster/leaflet.markercluster-src.js"></script>
+        <script src="/js/jquery-1.10.2.min.js"></script>
+        <script src="/js/rlayer-src.js"></script>
+        <script src="/js/raphael.js"></script>
+        <script src="/js/ufo.js"></script>
+        <script src="/js/ajax.js"></script>
+        </head><body bgcolor="black" text="black">
+        <div id="wrapper">
+        <div id="map" style="width: 100%; height: 100%"></div>
+        </div>
+        <script type="text/javascript">
+        window.onload = function(){
+        """
+        
         try:
             target_js="total_zombies = "+str( int(self.file_len(self.zombies_file))+int(self.file_len(self.aliens_file))+int(self.file_len(self.droids_file))+int(self.file_len(self.ucavs_file))+int(self.file_len(self.rpcs_file))+int(self.file_len(self.ntps_file))+int(self.file_len(self.dnss_file))+int(self.file_len(self.snmps_file)) )+"\ninitMap()\n\n"
         except:
@@ -118,12 +176,35 @@ window.onload = function(){
 """ + self.pages["/footer"]      
 
     def html_request_submit(self):
+        """Submits an HTML request and updates settings.
+                Parameters:
+                    - self (object): The object being used.
+                Returns:
+                    - None: No return value.
+                Processing Logic:
+                    - Submits an HTML request.
+                    - Updates settings.
+                    - Uses a timeout of 1234 milliseconds.
+                return self.pages["/header"]+"""
+        
         return self.pages["/header"]+"""<script>
 window.setTimeout(window.close,1234)
 </script></head><body bgcolor="black" text="yellow" style="font-family:Courier, 'Courier New', monospace;" >
 <center>settings updated"""+self.pages["/footer"]
 
     def html_requests(self):
+        """This function is used to read and set values from a requests configuration file in JSON format. It takes in two parameters, self and data_file. The function returns an HTML form with the configured requests.
+        Processing Logic:
+        - Reads the requests configuration file in JSON format.
+        - If the file cannot be opened, an error message is printed.
+        - If the file does not exist, a default configuration file is generated.
+        - The values from the configuration file are set to the HTML form.
+        - Available user-agents are generated and a random user-agent is chosen.
+        - The values for rproxy, ruseragent, rreferer, rhost, rxforw, rxclient, rtimeout, rretries, rdelay, threads, and rssl are set from the configuration file.
+        - The function returns an HTML form with the configured requests.
+        Example:
+        html_requests(self, data_file)"""
+        
         # read requests configuration file (json)
         try:
             with open(self.mothership_webcfg_file) as data_file:    
@@ -239,18 +320,33 @@ function Requests() {
 """ + self.pages["/footer"]
 
     def html_board_profile_submit(self):
+        """"Updates the board profile and displays a confirmation message. Closes the window after 1234 milliseconds.
+        Parameters:
+            - self (object): The object containing the pages dictionary.
+        Returns:
+            - str: The updated board profile with a confirmation message.
+        Processing Logic:
+            - Concatenates the header, a script to close the window, and the footer to the updated board profile.
+            - Sets the background color to black and the text color to yellow.
+            - Uses the Courier font family.
+            - Displays a centered message to re-enter to see changes.""""
+        
         return self.pages["/header"]+"""<script>
 window.setTimeout(window.close,1234)
 </script></head><body bgcolor="black" text="yellow" style="font-family:Courier, 'Courier New', monospace;" >
 <center>Board profile updated. Re-enter to see changes..."""+self.pages["/footer"]
 
     def html_grid_profile_submit(self):
+        """"""
+        
         return self.pages["/header"]+"""<script>
 window.setTimeout(window.close,1234)
 </script></head><body bgcolor="black" text="yellow" style="font-family:Courier, 'Courier New', monospace;" >
 <center>Grid profile updated. Re-enter to see changes..."""+self.pages["/footer"]
 
     def profile_crew(self, icon):
+        """"""
+        
         files = os.listdir("core/images/crew/")
         if icon == "NONE":
             icon = "link1"
@@ -269,6 +365,8 @@ window.setTimeout(window.close,1234)
         return html_stream
 
     def html_board_profile(self):
+        """"""
+        
         try:
             with open(self.mothership_boardcfg_file) as data_file:    
                 data = json.load(data_file)
@@ -313,6 +411,8 @@ function BoardProfile() {
 """ + self.pages["/footer"]
 
     def html_grid_profile(self):
+        """"""
+        
         try:
             with open(self.mothership_gridcfg_file) as data_file:    
                 data = json.load(data_file)
@@ -358,6 +458,8 @@ function GridProfile() {
 """ + self.pages["/footer"]
 
     def html_board_remove(self):
+        """"""
+        
         try:
             with open(self.mothership_boardcfg_file, "w") as f:
                 json.dump({"profile_token": "NONE", "profile_icon": "NONE", "profile_nick": "Anonymous"}, f, indent=4)
@@ -369,6 +471,8 @@ window.setTimeout(window.close,1234)
 <center>Board profile updated. Re-enter to see changes..."""+self.pages["/footer"]
 
     def html_grid_remove(self):
+        """"""
+        
         try:
             with open(self.mothership_gridcfg_file, "w") as f:
                 json.dump({"grid_token": "NONE", "grid_contact": "UNKNOWN!", "grid_nick": "Anonymous"}, f, indent=4)
@@ -380,6 +484,8 @@ window.setTimeout(window.close,1234)
 <center>Grid profile updated. Re-enter to see changes..."""+self.pages["/footer"]
 
     def html_stats(self):
+        """"""
+        
         total_extra_attacks = int(self.aloic) + int(self.aloris) + int(self.aufosyn) + int(self.aspray) + int(self.asmurf) + int(self.axmas) + int(self.anuke) + int(self.atachyon) + int(self.amonlist) + int(self.afraggle) + int(self.asniper) + int(self.aufoack) + int(self.auforst) + int(self.adroper) + int(self.aoverlap) + int(self.apinger) + int(self.aufoudp)
         if self.ranking == "Rookie": # Rookie
             your_ranking = "<font color='white'>Rookie [*]</font>"
@@ -499,6 +605,8 @@ function Streams() {
 """ + self.pages["/footer"]
 
     def hmac_sha1(self, key, msg):
+        """"""
+        
         if len(key) > 20:
             key = sha1(key).digest()
         key += chr(0).encode('utf-8') * (20 - len(key))
@@ -507,6 +615,8 @@ function Streams() {
         return sha1(o_key_pad + sha1(i_key_pad + msg).digest()).digest()
 
     def derive_keys(self, key):
+        """"""
+        
         key = key.encode('utf-8')
         h = sha256()
         h.update(key)
@@ -519,6 +629,8 @@ function Streams() {
         return (cipher_key, mac_key)
 
     def decrypt(self, key, text):
+        """"""
+        
         KEY_SIZE = 32
         BLOCK_SIZE = 16
         MAC_SIZE = 20
@@ -552,6 +664,8 @@ function Streams() {
             pass
 
     def encrypt(self, key, text):
+        """"""
+        
         try:
             key = base64.b64encode(str(key))
         except:
@@ -566,6 +680,8 @@ function Streams() {
         self.encryptedtext = str(msg)
 
     def html_news(self):
+        """"""
+        
         return self.pages["/header"] + """<script language="javascript">
 function Decrypt(){
         news_key=document.getElementById("news_key").value
@@ -618,6 +734,8 @@ Last update: <font color='"""+ self.news_status_color + """'>"""+ self.news_date
 """ + self.pages["/footer"]
 
     def html_tv(self):
+        """"""
+        
         return self.pages["/header"] + """<script language="javascript">
 function Decrypt_tv(){
         tv_deckey=document.getElementById("tv_deckey").value
