@@ -54,6 +54,18 @@ DEBUG = False # use 'True' for detailed traceback
 
 class UFONet(object):
     def __init__(self):
+        """Purpose:
+            This function initializes the variables and settings used by the UFONet program.
+        Parameters:
+            None
+        Returns:
+            None
+        Processing Logic:
+            - Sets default values for various variables used by the program.
+            - Retrieves and stores information from various files.
+            - Creates a context to bypass SSL certificate validation.
+            - Sets counters and flags used for tracking program activity."""
+        
         self.exit_msg = 'Donate BTC (Bitcoin) to keep UFONet (https://ufonet.03c8.net) strong!' # set msg show at the end [FILO ;-)]
         self.blackhole = '46.163.118.220' # default download/upload zombies [Blackhole] [Server] / Try [DIY] your own [Mirror]...
         self.crypto_key = "U-NATi0n!" # default cryptkey
@@ -176,6 +188,20 @@ class UFONet(object):
         self.trans_36 = self.trans_36.encode("latin-1")
 
     def mothership_baptism(self):
+        """Function:
+        def mothership_baptism(self):
+            Retrieves or generates a unique mothership ID for the current instance.
+            Parameters:
+                - self (object): The current instance of the class.
+            Returns:
+                - mothership_id (str): The unique mothership ID for the current instance.
+            Processing Logic:
+                - Checks if the mothership name file exists, if it does, retrieves the ID from the file.
+                - If the file does not exist, generates a list of possible mothership IDs from a file and selects one at random.
+                - If no valid mothership ID can be generated, uses a default mothership name.
+                - Ensures that the mothership ID is not longer than 20 characters.
+                - Writes the mothership ID to a file for future use."""
+        
         if os.path.exists(self.mothershipname) == True:
             f = open(self.mothershipname)
             self.mothership_id = f.read()
@@ -205,6 +231,20 @@ class UFONet(object):
             m.close()
 
     def create_options(self, args=None):
+        """Creates options for UFONet and returns them.
+        Parameters:
+            - args (list): Optional list of arguments to be passed to UFONetOptions.
+        Returns:
+            - options (UFONetOptions): Options for UFONet.
+        Processing Logic:
+            - Creates options using UFONetOptions class.
+            - Gets options using get_options method.
+            - Returns False if options are not found.
+            - Returns options if found.
+        Example:
+            options = create_options(["-h"])
+            # options is now an instance of UFONetOptions with help option enabled."""
+        
         self.optionParser = UFONetOptions()
         self.options = self.optionParser.get_options(args)
         if not self.options:
@@ -212,6 +252,28 @@ class UFONet(object):
         return self.options
 
     def banner_welcome(self):
+        """Function:
+        def banner_welcome(self):
+            Prints a banner to welcome users to the botnet and provide information about the botnet and its capabilities.
+            Parameters:
+                - self (object): The object that calls the function.
+            Returns:
+                - None: This function does not return any value.
+            Processing Logic:
+                - Prints a banner with information about the botnet.
+                - The banner is made up of ASCII art.
+                - The banner contains information about the botnet's capabilities, such as DDoS and DoS attacks.
+                - The banner also contains information about the botnet's tools, such as LOIC and LORIS.
+                - The banner also contains information about the botnet's targets, such as ZOMBIES and DROIDS.
+                - The banner also contains information about the botnet's weapons, such as NUKE and UFOACK.
+                - The banner also contains information about the botnet's methods, such as X-RPCs and SMURF.
+                - The banner also contains information about the botnet's tools, such as MONLIST and PINGER.
+                - The banner also contains information about the botnet's tools, such as SNIPER and UFOUDP.
+                - The banner also contains information about the botnet's creator, UFONet.
+                - The banner also contains information about the botnet's class, PSYoPs.
+                - The banner also contains information about the botnet's mothership model.
+                - The banner is printed to the console."""
+        
         print("                     ____                                                                        ")
         print("          ||        / /\ \      ||              #===============================================#")
         print("        -(00)-     + (XX) +   -(00)-            ||                                             ||")
@@ -238,6 +300,68 @@ class UFONet(object):
         print("")
 
     def banner(self):
+        """Prints a banner with the given description.
+        Parameters:
+            - self (object): The object to be used for printing the banner.
+        Returns:
+            - None: This function does not return any value.
+        Processing Logic:
+            - Prints a banner using the given description.
+            - Uses the optionParser description for the banner.
+            - Prints the banner using '=' characters.
+            - Prints the banner using '888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '888888' characters.
+            - Prints the banner using '8888888' characters.
+            - Prints the banner using '88888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '8888888888' characters.
+            - Prints the banner using '888888888"""
+        
         print('='*75, "\n")
         print("888     888 8888888888 .d88888b.  888b    888          888    ")   
         print("888     888 888        d88P Y888b 8888b   888          888    ")
@@ -251,6 +375,8 @@ class UFONet(object):
         print('='*75)
 
     def generate_exit_msg(self):
+        """"""
+        
         self.exit_msg = "Generating random exit... \n\n"
         try:
             f = open(self.misc_file)
@@ -261,6 +387,8 @@ class UFONet(object):
             self.exit_msg += " -> Donate BTC (Bitcoin) to keep #UFONet (https://ufonet.03c8.net) strong!" 
 
     def AI(self):
+        """"""
+        
         try:
             import turtle as AI
             print("\n[AI] Making a unique drawing using 'Turtle' (Feurzig & Papert - 1966) -> [OK!]\n")
@@ -281,14 +409,20 @@ class UFONet(object):
             pass
 
     def round_float(self, num):
+        """"""
+        
         return str(int(round(num, -1)))[2] # black magic
 
     def show_mac_address(self):
+        """"""
+        
         mac = getnode() # to get physical address
         hex_mac = str(":".join(re.findall('..', '%012x' % mac)))
         return hex_mac
 
     def show_ips(self):
+        """"""
+        
         import requests
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -310,6 +444,8 @@ class UFONet(object):
         return private_ip, public_ip
 
     def try_running(self, func, error, args=None):
+        """"""
+        
         options = self.options
         args = args or []
         try:
@@ -320,6 +456,8 @@ class UFONet(object):
                 traceback.print_exc()
 
     def checkeuid(self):
+        """"""
+        
         try:
             euid = os.geteuid()
         except:
@@ -329,6 +467,8 @@ class UFONet(object):
         return euid
 
     def start_ship_engine(self):
+        """"""
+        
         self.agents = [] # generating available user-agents
         f = open(self.agents_file)
         agents = f.readlines()
@@ -352,6 +492,8 @@ class UFONet(object):
         self.generate_exit_msg() # generate random exit msg
 
     def hmac_sha1(self, key, msg):
+        """"""
+        
         if len(key) > 20:
             key = sha1(key).digest()
         key += chr(0).encode('utf-8') * (20 - len(key))
@@ -360,6 +502,8 @@ class UFONet(object):
         return sha1(o_key_pad + sha1(i_key_pad + msg).digest()).digest()
 
     def derive_keys(self, key):
+        """"""
+        
         key = key.encode('utf-8')
         h = sha256()
         h.update(key)
@@ -372,6 +516,8 @@ class UFONet(object):
         return (cipher_key, mac_key)
 
     def decrypt(self, key, text):
+        """"""
+        
         KEY_SIZE = 32
         BLOCK_SIZE = 16
         MAC_SIZE = 20
@@ -405,6 +551,8 @@ class UFONet(object):
             pass
 
     def run(self, opts=None):
+        """"""
+        
         if opts:
             self.create_options(opts)
         options = self.options
@@ -1622,16 +1770,22 @@ class UFONet(object):
 
     # starting new zombie thread
     def connect_zombies(self, zombie):
+        """"""
+        
         z=Zombie(self, zombie)
         t = threading.Thread(target=z.connect, name=zombie)
         t.start()
 
     # single connection handling
     def connect_zombie(self, zombie):
+        """"""
+        
         z=Zombie(self,zombie)
         return z.connect()
 
     def extract_proxy(self, proxy):
+        """"""
+        
         sep = ":"
         proxy_ip = proxy.rsplit(sep, 1)[0]
         if proxy_ip.startswith('http://'):
