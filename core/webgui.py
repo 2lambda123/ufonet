@@ -6346,13 +6346,13 @@ function runCommandX(cmd,params) {
                 globalnet_comment = "-"
             globalnet_warp = pGet["globalnet_warp"]
             try:
-                globalnet_ip = requests.get(check_ip_service3).text
+                globalnet_ip = requests.get(check_ip_service3, timeout=60).text
             except:
                 try:
-                    globalnet_ip = requests.get(check_ip_service2).text
+                    globalnet_ip = requests.get(check_ip_service2, timeout=60).text
                 except:
                     try:
-                        globalnet_ip = requests.get(check_ip_service1).text
+                        globalnet_ip = requests.get(check_ip_service1, timeout=60).text
                     except:
                         globalnet_ip = "Unknown!"
             if blackhole_flag == False: # only add NEW blackholes/IPs into the list

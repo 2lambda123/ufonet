@@ -298,13 +298,13 @@ class UFONet(object):
         except:
             private_ip = "Unknown"
         try:
-            public_ip = requests.get(self.check_ip_service3).text
+            public_ip = requests.get(self.check_ip_service3, timeout=60).text
         except:
             try:
-                public_ip = requests.get(self.check_ip_service2).text
+                public_ip = requests.get(self.check_ip_service2, timeout=60).text
             except:
                 try:
-                    public_ip = requests.get(self.check_ip_service1).text
+                    public_ip = requests.get(self.check_ip_service1, timeout=60).text
                 except:
                     public_ip = "Unknown"
         return private_ip, public_ip
